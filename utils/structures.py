@@ -10,6 +10,7 @@ class Selectors(Enum):
     DESCRIPTION = "span[id*='products_description']"
     PRODUCT_IMAGES = "div[class*='productView']"
     SIZE_LIST = "ul[id*='display_size']"
+    MAIN_PHOTO = "img[id='productImage']"
 
 class BrandIDType(Enum):
     MARQUE = "marque"
