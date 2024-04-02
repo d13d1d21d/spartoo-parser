@@ -81,7 +81,7 @@ class Parser:
 
         if req := self.proxy_client.retry("GET", url):
             if html := bs(req.text, "html.parser"):
-                images = list(i.get("src") for i in html.select(Selectors.PRODUCT_IMAGES.value + ">a>img[id]"))
+                images = list(i.get("src").replace("_40_", "_1200_") for i in html.select(Selectors.PRODUCT_IMAGES.value + ">a>img[id]"))
                 product_card = html.select_one(Selectors.PRODUCT_CARD.value)
                 name_color = product_card.find("div", { "class": "productNameColor" })
 
