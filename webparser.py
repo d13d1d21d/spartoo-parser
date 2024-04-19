@@ -89,7 +89,8 @@ class Parser:
                 brand = product_card.find("div", { "itemprop": "brand" }).get("content")
                 color_origin = name_color.find("span", { "itemprop": "color" }).text.strip().replace(" ", "")
                 color = "/".join(COLORS.get(i.title(), "не определено") for i in color_origin.split("/"))
-                name = name_color.find("span", { "itemprop": "name" }).text.strip().replace("_", " ")
+                if not (name := name_color.find("span", { "itemprop": "name" }).text.strip().replace("_", " ")):
+                    name = json.loads(html.select_one(Selectors.SCHEMA.value).text).get("itemListElement")[-1].get("item").get("name").strip()
                 
                 category = ">".join(
                     i.get("item").get("name").strip()
